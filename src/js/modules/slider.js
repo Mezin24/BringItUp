@@ -30,9 +30,16 @@ export default class Slider {
 
     this.slides.forEach((item) => {
       item.style.display = 'none';
+      this.slides[this.slideIndex - 1].classList.remove(
+        'animate__animated',
+        'animate__slideInRight'
+      );
     });
-
     this.slides[this.slideIndex - 1].style.display = 'block';
+    this.slides[this.slideIndex - 1].classList.add(
+      'animate__animated',
+      'animate__slideInRight'
+    );
   }
 
   plusSlide(n) {

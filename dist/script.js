@@ -1003,8 +1003,11 @@ function () {
 
       this.slides.forEach(function (item) {
         item.style.display = 'none';
+
+        _this.slides[_this.slideIndex - 1].classList.remove('animate__animated', 'animate__slideInRight');
       });
       this.slides[this.slideIndex - 1].style.display = 'block';
+      this.slides[this.slideIndex - 1].classList.add('animate__animated', 'animate__slideInRight');
     }
   }, {
     key: "plusSlide",
