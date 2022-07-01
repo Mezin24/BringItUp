@@ -976,6 +976,8 @@ function () {
   _createClass(Slider, [{
     key: "showSlide",
     value: function showSlide(n) {
+      var _this = this;
+
       if (n > this.slides.length) {
         this.slideIndex = 1;
       }
@@ -983,6 +985,21 @@ function () {
       if (n < 1) {
         this.slideIndex = this.slides.length;
       }
+
+      try {
+        this.hanson.style.opacity = '0';
+
+        if (n === 3) {
+          this.hanson.classList.add('animate__animated');
+          setTimeout(function () {
+            _this.hanson.style.opacity = '1';
+
+            _this.hanson.classList.add('animate__slideInUp');
+          }, 3000);
+        } else {
+          this.hanson.classList.remove('animate__slideInUp');
+        }
+      } catch (e) {}
 
       this.slides.forEach(function (item) {
         item.style.display = 'none';
@@ -997,19 +1014,23 @@ function () {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
+
+      try {
+        this.hanson = document.querySelector('.hanson');
+      } catch (e) {}
 
       this.btns.forEach(function (btn) {
         btn.addEventListener('click', function (e) {
           e.preventDefault();
 
-          _this.plusSlide(1);
+          _this2.plusSlide(1);
         });
         btn.parentElement.previousElementSibling.addEventListener('click', function (e) {
           e.preventDefault();
-          _this.slideIndex = 1;
+          _this2.slideIndex = 1;
 
-          _this.showSlide(_this.slideIndex);
+          _this2.showSlide(_this2.slideIndex);
         });
       });
       this.showSlide(this.slideIndex);
