@@ -20,7 +20,6 @@ export default class PlayVideo {
 
   bindClose() {
     this.close.addEventListener('click', () => {
-      console.log(this.close);
       this.overlay.style.display = 'none';
       this.player.stopVideo();
     });
