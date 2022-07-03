@@ -54,8 +54,6 @@ export default class MiniSlider extends Slider {
     this.decoreateSlide();
   }
 
-  stopAutoplay() {}
-
   activateAnimation() {
     if (this.autoplay) {
       this.paused = setInterval(() => this.nextSlide(), 3000);
