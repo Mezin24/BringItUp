@@ -9,6 +9,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const mainSlider = new MainSlider({ container: '.page', btns: '.next' });
   mainSlider.render();
 
+  const modulePageSlider = new MainSlider({
+    container: '.moduleapp',
+    btns: '.next',
+    next: '.nextmodule',
+    prev: '.prevmodule',
+  });
+
+  modulePageSlider.render();
+
   const playVideo = new PlayVideo('.showup .play', '.overlay');
   playVideo.init();
 

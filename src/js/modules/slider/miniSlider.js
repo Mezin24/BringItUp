@@ -22,23 +22,27 @@ export default class MiniSlider extends Slider {
   }
 
   bindTriggers() {
-    this.next.addEventListener('click', () => {
-      this.nextSlide();
+    this.next.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        this.nextSlide();
+      });
     });
 
-    this.prev.addEventListener('click', () => {
-      if ([...this.slides].some((item) => item.tagName === 'BUTTON')) {
-        this.container.insertBefore(
-          this.slides[this.slides.length - 3],
-          this.slides[0]
-        );
-      } else {
-        this.container.insertBefore(
-          this.slides[this.slides.length - 1],
-          this.slides[0]
-        );
-      }
-      this.decoreateSlide();
+    this.prev.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if ([...this.slides].some((item) => item.tagName === 'BUTTON')) {
+          this.container.insertBefore(
+            this.slides[this.slides.length - 3],
+            this.slides[0]
+          );
+        } else {
+          this.container.insertBefore(
+            this.slides[this.slides.length - 1],
+            this.slides[0]
+          );
+        }
+        this.decoreateSlide();
+      });
     });
   }
 
@@ -61,25 +65,26 @@ export default class MiniSlider extends Slider {
   }
 
   init() {
-    this.container.style.cssText = `
+    try {
+      this.container.style.cssText = `
       display: flex;
       flex-wrap: wrap;
       overflow: hidden;
       align-items: flex-start;
-    `;
+      `;
+      this.bindTriggers();
+      this.decoreateSlide();
+      this.activateAnimation();
 
-    this.bindTriggers();
-    this.decoreateSlide();
-    this.activateAnimation();
+      [...this.prev, ...this.next].forEach((btn) => {
+        btn.addEventListener('mouseover', () => {
+          clearInterval(this.paused);
+        });
 
-    [this.prev, this.next].forEach((btn) => {
-      btn.addEventListener('mouseover', () => {
-        clearInterval(this.paused);
+        btn.addEventListener('mouseleave', () => {
+          this.activateAnimation();
+        });
       });
-
-      btn.addEventListener('mouseleave', () => {
-        this.activateAnimation();
-      });
-    });
+    } catch (e) {}
   }
 }
