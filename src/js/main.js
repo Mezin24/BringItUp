@@ -3,8 +3,6 @@ import MiniSlider from './modules/slider/miniSlider';
 import PlayVideo from './modules/playVideo';
 import Difference from './modules/difference';
 import Form from './modules/form';
-import CheckTextInput from './modules/checkTextInput';
-import Mask from './modules/mask';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -45,6 +43,4 @@ window.addEventListener('DOMContentLoaded', () => {
   new Difference('.officerold', '.officer__card-item').init();
   new Difference('.officernew', '.officer__card-item').init();
   new Form('.form').init();
-  new CheckTextInput('[name="email"]').init();
-  new Mask('[name="phone"]').init();
 });
