@@ -15,6 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
     prev: '.showup__prev',
     next: '.showup__next',
     activeClass: 'card-active',
+    animate: true,
+    autoplay: true,
   });
   showupSlider.init();
 
@@ -23,6 +25,8 @@ window.addEventListener('DOMContentLoaded', () => {
     prev: '.modules__info-btns .slick-prev',
     next: '.modules__info-btns .slick-next',
     activeClass: 'card-active',
+    animate: true,
+    autoplay: true,
   });
   modulesSlider.init();
 

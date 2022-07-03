@@ -7,14 +7,14 @@ export default class MiniSlider extends Slider {
 
   decoreateSlide() {
     this.slides.forEach((slide) => {
-      if (slide.querySelector('.card__controls-arrow')) {
+      if (this.animate) {
         slide.querySelector('.card__controls-arrow').style.opacity = 0;
         slide.querySelector('.card__title').style.opacity = 0.4;
       }
       slide.classList.remove(this.activeClass);
     });
 
-    if (this.slides[0].querySelector('.card__controls-arrow')) {
+    if (this.animate) {
       this.slides[0].querySelector('.card__controls-arrow').style.opacity = 1;
       this.slides[0].querySelector('.card__title').style.opacity = 1;
     }
@@ -22,33 +22,44 @@ export default class MiniSlider extends Slider {
   }
 
   bindTriggers() {
-    this.prev.addEventListener('click', () => {
-      this.container.append(this.slides[0]);
-      this.decoreateSlide();
+    this.next.addEventListener('click', () => {
+      this.nextSlide();
     });
 
-    this.next.addEventListener('click', () => {
-      // if (this.slides[0].tagName !== 'BUTTON') {
-      //   this.container.insertBefore(
-      //     this.slides[this.slides.length - 1],
-      //     this.slides[0]
-      //   );
-      //   this.container.insertBefore(
-      //     this.slides[this.slides.length - 1],
-      //     this.slides[1]
-      //   );
-      //   this.container.insertBefore(
-      //     this.slides[this.slides.length - 1],
-      //     this.slides[2]
-      //   );
-      //   console.log('btn');
-      // }
-      this.container.insertBefore(
-        this.slides[this.slides.length - 1],
-        this.slides[0]
-      );
+    this.prev.addEventListener('click', () => {
+      if ([...this.slides].some((item) => item.tagName === 'BUTTON')) {
+        this.container.insertBefore(
+          this.slides[this.slides.length - 3],
+          this.slides[0]
+        );
+      } else {
+        this.container.insertBefore(
+          this.slides[this.slides.length - 1],
+          this.slides[0]
+        );
+      }
       this.decoreateSlide();
     });
+  }
+
+  nextSlide() {
+    if ([...this.slides].some((item) => item.tagName === 'BUTTON')) {
+      this.container.insertBefore(
+        this.slides[0],
+        this.slides[this.slides.length - 3]
+      );
+    } else {
+      this.container.append(this.slides[0]);
+    }
+    this.decoreateSlide();
+  }
+
+  stopAutoplay() {}
+
+  activateAnimation() {
+    if (this.autoplay) {
+      this.paused = setInterval(() => this.nextSlide(), 3000);
+    }
   }
 
   init() {
@@ -61,5 +72,16 @@ export default class MiniSlider extends Slider {
 
     this.bindTriggers();
     this.decoreateSlide();
+    this.activateAnimation();
+
+    [this.prev, this.next].forEach((btn) => {
+      btn.addEventListener('mouseover', () => {
+        clearInterval(this.paused);
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        this.activateAnimation();
+      });
+    });
   }
 }

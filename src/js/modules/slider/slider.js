@@ -15,5 +15,7 @@ export default class Slider {
     this.prev = document.querySelector(prev);
     this.next = document.querySelector(next);
     this.activeClass = activeClass;
+    this.animate = animate;
+    this.autoplay = autoplay;
   }
 }
