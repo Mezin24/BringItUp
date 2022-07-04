@@ -4,6 +4,7 @@ import PlayVideo from './modules/playVideo';
 import Difference from './modules/difference';
 import Form from './modules/form';
 import Accordion from './modules/accordion';
+import Download from './modules/download';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -54,4 +55,5 @@ window.addEventListener('DOMContentLoaded', () => {
   new Difference('.officernew', '.officer__card-item').init();
   new Form('.form').init();
   new Accordion('.module__info-show .plus').init();
+  new Download('.download').init();
 });
