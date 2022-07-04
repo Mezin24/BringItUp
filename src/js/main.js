@@ -18,8 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   modulePageSlider.render();
 
-  const playVideo = new PlayVideo('.showup .play', '.overlay');
-  playVideo.init();
+  new PlayVideo('.showup .play', '.overlay').init();
+  new PlayVideo('.module .play', '.overlay').init();
 
   const showupSlider = new MiniSlider({
     container: '.showup__content-slider',
